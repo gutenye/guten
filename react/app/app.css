@@ -1,0 +1,9 @@
+input.edit {
+  display: none;
+}
+
+.editing input.edit {
+  display: block;
+  position: relative;
+}
+

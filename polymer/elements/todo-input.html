@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="todo-input">
+  <template>
+    <div>
+      <input type="checkbox" on-change="toggleAllCompleted" />
+      <input placeholder="What needs to be done?" autofocus on-keyup="keyup" />
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "todo-input",
+
+    keyup: function(event) {
+      switch(event.keyCode) {
+        case 13: // Enter
+          this.model.create(event.target.value)
+          event.target.value = ""
+          break
+        case 27: // Esc
+          event.target.value = ""
+          break
+      }
+    },
+
+    toggleAllCompleted: function(event) {
+      this.model.toggleAllCompleted(event.target.checked)
+    }
+  })
+</script>

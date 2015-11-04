@@ -1,0 +1,18 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="todo-item.html">
+
+<dom-module id="todo-list">
+  <template>
+    <ul>
+      <template is="dom-repeat" items="{{model.todos}}">
+        <li><todo-item model={{model}} item={{item}} index={{index}}></todo-item></li>
+      </template>
+    </ul>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "todo-list"
+  })
+</script>

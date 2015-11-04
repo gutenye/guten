@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- ES6-related imports -->
+    <script src="lib/traceur-runtime.js"></script>
+    <script src="lib/system-csp-production.src.js"></script>
+    <script>
+        System.config({defaultJSExtensions: true});
+    </script>
+    <script src="lib/Reflect.js"></script>
+
+    <!-- Angular2-related imports -->
+    <script src="lib/zone.js"></script>
+    <script src="lib/long-stack-trace-zone.js"></script>
+    <script src="lib/angular2.js"></script>
+  </head>
+<body>
+  <app></app>
+</body>
+<script>
+  var pd = console.log.bind(console)
+  System.import("app").catch(console.log.bind(console));
+</script>
+</html>

@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<script>
+  Polymer({
+    is: "todo-model",
+
+    properties: {
+      model: {
+        type: Array,
+        notify: true
+      }
+    },
+
+    ready: function() {
+      this.model = this
+      this.todos = [{title: "Hello", completed: false}, {title: "World", completed: true}]
+    },
+
+    create: function(value) {
+      this.push("model.todos", {title: value, completed: false})
+    },
+
+    delete: function(index) {
+      this.splice("model.todos", index, 1)
+    },
+
+    toggleAllCompleted: function(completed) {
+      this.todos.forEach(function(v, i) {
+        this.set("model.todos."+i+".completed", completed)
+      }.bind(this))
+    }
+  })
+</script>

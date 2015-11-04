@@ -1,0 +1,63 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="todo-item">
+  <style>
+    .completed label {
+      text-decoration: line-through;
+    }
+  </style>
+  <template>
+    <div class$={{cx(item.completed)}} hidden={{editing}}>
+      <input type="checkbox" checked={{item.completed::change}}></input>
+      <label  on-dblclick="editBegin">{{item.title}}</label>
+      <button on-click="delete">X</button>
+    </div>
+    <div hidden={{!editing}}>
+      <input id="edit" value={{item.title}} on-keyup="edit" on-blur="editDone"></input>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "todo-item",
+
+    cx: function(completed) {
+      return completed ? "completed" : ""
+    },
+
+    attached: function() {
+      this.editing = false
+    },
+
+    editBegin: function() {
+      this.editing = true
+      this.$.edit.focus()
+    },
+
+    edit: function(evt) {
+      switch(evt.keyCode) {
+        case 13: // Enter
+          this.editDone()
+          break
+        case 27: // Esc
+          this.editCancel()
+          break
+      }
+    },
+
+    editDone: function(evt) {
+      this.set("item.title", evt.target.value)
+      this.editing = false
+    },
+
+    editCancel: function() {
+      evt.target.value = this.item.title
+      this.editing = false
+    },
+
+    delete: function(evt) {
+      this.model.delete(this.index)
+    }
+  })
+</script>
