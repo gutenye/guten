@@ -1,4 +1,5 @@
 import React from "react"
+import ReactDom from "react-dom"
 import Model from "./model"
 import Input from "./input"
 import List from "./list"
@@ -31,4 +32,4 @@ window.model = new Model()
 window.rerender = function() {
   app.setState({})
 }
-React.render(<App />, document.querySelector("#app"))
+ReactDom.render(<App />, document.querySelector("#app"))

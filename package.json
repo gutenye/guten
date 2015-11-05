@@ -1,0 +1,35 @@
+{
+  "name": "todomvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gutenye/todomvc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gutenye/todomvc/issues"
+  },
+  "homepage": "https://github.com/gutenye/todomvc#readme",
+  "dependencies": {
+    "graphql": "^0.4.12",
+    "graphql-relay": "^0.3.5"
+  },
+  "devDependencies": {
+    "babel-core": "",
+    "babel-loader": "",
+    "babel-preset-es2015": "",
+    "babel-preset-react": "",
+    "express": "^4.13.3",
+    "express-graphql": "",
+    "traceur-loader": "github:gutenye/traceur-loader",
+    "webpack": "",
+    "webpack-dev-middleware": "",
+    "webpack-dev-server": ""
+  }
+}
