@@ -2,16 +2,17 @@
 <html>
 <head>
   <title>Todo (Polymer)</title>
+  <link rel="stylesheet" href="/common/common.css">
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/lodash-guten/lodash-guten.js"></script>
   <script src="bower_components/classnames/index.js"></script>
-  <link rel="import" href="app/my-app.html">
   <script src="/common/common.js"></script>
   <script>
     pd = console.log.bind(console)
     Object.assign(window, todocommon)
   </script>
+  <link rel="import" href="app/my-app.html">
 </head>
 <body>
   <my-app></my-app>

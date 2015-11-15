@@ -4,7 +4,7 @@ var path = require("path")
 module.exports = {
   entry: path.join(__dirname, "index"),
   output: {
-    path: path.join(__dirname, "../public"),
+    path: path.join(__dirname, "../dist"),
     filename: "common.js",
     library: "todocommon",
     libraryTarget: "umd"
