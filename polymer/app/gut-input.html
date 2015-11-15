@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<!--
+<input is="gut-input" on-enter=x>
+
+Keyboard shortcuts
+  Esc: clear
+-->
+
+<script>
+Polymer({
+  is: "gut-input",
+  extends: "input",
+  listeners: {
+    keydown: "keydown"
+  },
+
+  keydown(e) {
+    switch(e.which) {
+    case 13: // Enter
+      this.fire("enter")
+      break
+    case 27: // Esc
+      e.target.value = ""
+      break
+    }
+  }
+})
+</script>

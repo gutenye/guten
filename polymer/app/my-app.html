@@ -1,0 +1,100 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="todo-todos.html">
+<link rel="import" href="gut-input.html">
+
+<dom-module id="my-app">
+  <style>
+    .completed label {
+      text-decoration: line-through;
+    }
+
+    input {
+      border: 0;
+    }
+
+    input:focus {
+      outline: 0;
+    }
+
+    flex {
+      display: flex
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <template>
+    <todo-todos id="todos" self={{todos}} items={{todoItems}}></todo-todos>
+
+    <!-- input -->
+    <div>
+      <input type="checkbox" on-change="toggleAllCompleted" />
+      <input is="gut-input" placeholder="What needs to be done?" autofocus on-enter="enter" on-esc="esc" />
+    </div>
+
+    <!-- list -->
+    <ul>
+      <template is="dom-repeat" items={{todoItems}}>
+        <li class$={{cxItem(item.completed)}}>
+          <input type="checkbox" checked={{item.completed}} on-change="completedChanged"></input>
+          <input value={{item.title}} on-input="titleChanged"></input>
+          <button on-click="delete">X</button>
+        </li>
+      </template>
+    </ul>
+
+    <!-- status -->
+    <flex>
+      <div>{{activeCount}} items left</div>
+      <div>All Active Completed</div>
+      <div>Clear completed</div>
+    </flex>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "my-app",
+
+    properties: {
+      activeCount: {
+        type: Number,
+        computed: "_computeActiveCount(todoItems.*)"
+      }
+    },
+
+    _computeActiveCount() {
+      return this.todos && this.todos.activeCount
+    },
+
+    cxItem(completed) {
+      return classNames({completed: completed})
+    },
+
+    toggleAllCompleted(e) {
+      this.todos.toggleAllCompleted(e.target.checked)
+    },
+
+    enter(e) {
+      this.todos.create({title: e.target.value})
+      e.target.value = ""
+    },
+
+    completedChanged(e) {
+      this.set("item.completed", e.target.checked)
+      this.item.save()
+    },
+
+    titleChanged(e) {
+      this.ste("item.title", e.target.value)
+      this.item.save()
+    },
+
+    delete(e) {
+      this.todos.delete(this.item)
+    }
+  })
+</script>

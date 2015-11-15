@@ -13,6 +13,11 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer"
+    "polymer": "~1.2.2",
+    "paper-elements": "polymerelements/paper-elements#~1.0.5",
+    "iron-elements": "polymerelements/iron-elements#~1.0.4",
+    "lodash": "~3.10.1",
+    "lodash-guten": "~3.10.3",
+    "classnames": "~2.2.0"
   }
 }

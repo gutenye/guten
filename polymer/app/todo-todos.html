@@ -1,0 +1,58 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="todo-todos">
+  <template>
+    <!--
+    <iron-ajax url="/rest/todo" last-response={{items}} auto></iron-ajax>
+    -->
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "todo-todos",
+
+    properties: {
+      items: {
+        type: Array,
+        notify: true,
+        value: [],
+      },
+
+      self: {
+        type: Object,
+        notify: true
+      },
+    },
+
+    ready() {
+      this.self = this
+      Todos.find().then(todos => {
+        this.items = todos.items
+      })
+    },
+
+    create(props) {
+      return Todo.create(props).then(todo => {
+        this.push("items", todo)
+      })
+    },
+
+    delete(record) {
+      return record.delete().then(() => {
+        var index = _.findIndex(this.items, {id: record.id})
+        this.splice("items", index, 1)
+      })
+    },
+
+    toggleAllCompleted(completed) {
+      this.items.forEach((v, i) => {
+        this.set(`items.${i}.completed`, completed)
+      })
+    },
+
+    get activeCount() {
+      return this.items.filter(v => v.completed === false).length
+    }
+  })
+</script>

@@ -1,29 +1,23 @@
+import {Todo} from "./todo"
 
-export class Model {
-  constructor() {
-    this.todos = [{title: "Hello", completed: false}, {title: "World", completed: true}]
+class Store {
+  find(type, arg) {
+    if (_.isString(arg))
+      return _.fetch(`/rest/todo/${arg}`).then(data => new Todo(data))
+    else
+      return _.fetch("/rest/todo", {param: arg}).then(data => data.map(v => new Todo(v)))
   }
 
-  create(value) {
-    this.todos.push({title: value, completed: false})
+  create(type, data) {
+    return _.fetch("/rest/todo", {method: "POST", body: data})
   }
 
-  delete(index) {
-    this.todos.splice(index, 1)
+  update(record) {
+    return _.fetch(`/rest/todo/${record.id}`, {method: "PUT", body: record})
   }
 
-}
-
-
-export class Todo extends Object {
-  toggleAllCompleted(completed) {
-    this.todos.forEach(v => {
-      v.completed = completed
-    })
-  }
-
-  getRemaining() {
-		return this.todos.filter((v) => v.completed === false)
+  delete(record) {
+    return _.fetch(`/rest/todo/${record.id}`, {method: "DELETE"})
   }
 }
 
