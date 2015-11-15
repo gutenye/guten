@@ -66,13 +66,13 @@
     },
 
     completedChanged(e) {
-      this.set("item.completed", e.target.checked)
-      this.item.save()
+      e.model.set("item.completed", e.target.checked)
+      e.model.item.save()
     },
 
     titleChanged(e) {
-      this.ste("item.title", e.target.value)
-      this.item.save()
+      e.model.set("item.title", e.target.value)
+      e.model.item.save()
     },
 
     delete(e) {

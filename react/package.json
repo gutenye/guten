@@ -4,7 +4,9 @@
   "description": "FIXME",
   "dependencies": {
     "classnames": "^2.2.0",
-    "react": "",
-    "react-dom": ""
+    "lodash": "^3.10.1",
+    "lodash-guten": "^3.10.3",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
   }
 }
