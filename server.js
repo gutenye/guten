@@ -5,14 +5,16 @@ import webpack from "webpack"
 import WebpackDevServer from "webpack-dev-server"
 import webpackDevMiddleware from "webpack-dev-middleware"
 import graphqlHTTP from "express-graphql"
-import {schema} from "./common/schema"
+import {Schema} from "./common/schema"
 import {db} from "./common/database"
+import httpProxy from "http-proxy"
 import _ from "lodash"
 global._ = _
 global.pd = console.log.bind(console)
 
 var APP_PORT = 3001
 var app = express()
+var proxy = httpProxy.createProxyServer()
 app.use(bodyParser.json())
 app.use((req, resp, next) => {
   console.log("%s %s", req.method, req.url, req.query, req.body)
@@ -24,6 +26,9 @@ app.use((req, resp, next) => {
 //////////
 app.use("/react", webpackDevMiddleware(webpack(require("./react/webpack.config")), {noInfo: true}))
 app.use("/angular", webpackDevMiddleware(webpack(require("./angular/webpack.config")), {noInfo: true}))
+// relay use babel 5.0
+//app.use("/relay", webpackDevMiddleware(webpack(require("./relay/webpack.config")), {noInfo: true}))
+//app.use("/relay", (req, res) => proxy.web(req, res, {target: 'http://127.0.0.1:3008'}))
 app.use("/common", webpackDevMiddleware(webpack(require("./common/webpack.config")), {noInfo: true}))
 app.use("/polymer", express.static("polymer"))
 app.use("/", express.static(__dirname))
@@ -57,7 +62,8 @@ app.delete("/rest/todo/:id", (req, res) => {
 ////////////
 // Graphql API
 ///////////
-app.use("/graphql", graphqlHTTP({schema: schema, graphiql: true}))
+//app.use("/graphql", graphqlHTTP({schema: Schema, graphiql: true, pretty: true}))
+//app.use("/graphql", (req, res) => proxy.web(req, res, {target: 'http://127.0.0.1:3009'}))
 
 app.listen(APP_PORT, () => {
   console.log(`Server is now running on http://localhost:${APP_PORT}`)

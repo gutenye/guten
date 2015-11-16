@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>TodoMVC (Relay)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+      // Force `fetch` polyfill to workaround Chrome not displaying request body
+      // in developer tools for the native `fetch`.
+      self.fetch = null;
+      window.pd = console.log.bind(console)
+    </script>
+    <script src="http://localhost:3001/webpack-dev-server.js"></script>
+    <script src="app/app.js"></script>
+  </body>
+</html>

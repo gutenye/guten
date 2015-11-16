@@ -1,3 +1,12 @@
+Setup
+-----
+
+```
+1. ./ake
+2. for relay: cd relay; ./ake; goto localhost:3001      # for relay use babel previous 5.0 version.
+```
+
+
 ```
 ROOT/
   common/
@@ -36,7 +45,7 @@ GraphQL API
 
 ```
 `query {
-  todo {
+  todos {
     id
     title
     completed
