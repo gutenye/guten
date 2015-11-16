@@ -1,11 +1,17 @@
 Setup
 -----
 
-```
-1. ./ake
-2. for relay: cd relay; ./ake; goto localhost:3001      # for relay use babel previous 5.0 version.
-```
+For Relay
 
+1. cd relay
+2. ./ake mount                       # because relay use babel 5.x version, so can't symlink ../common .  which use ../node_modules
+3. ./ake
+4. goto localhost:3001
+
+For the Rest
+
+1. ./ake
+2. goto localhost:3000
 
 ```
 ROOT/

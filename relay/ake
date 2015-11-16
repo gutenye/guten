@@ -9,7 +9,12 @@ update() {
   node_modules/babel/bin/babel-node.js scripts/updateSchema.js
 }
 
+mount() {
+  mount -o bind ../common app/common
+}
+
 case "$1" in
   "" ) serve ;;
   u | update ) update ;;
+  mount ) mount ;;
 esac
