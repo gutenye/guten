@@ -1,4 +1,5 @@
 import {store} from "./store"
+import {Todo} from "./todo"
 
 export class Todos {
   static find() {
@@ -19,8 +20,12 @@ export class Todos {
 
   delete(record) {
     return record.delete().then(() => {
-      _.remove(this.lodos, {id: record.id})
+      _.remove(this.items, {id: record.id})
     })
+  }
+
+  saveAll() {
+    return Promise.all(this.items.map(v => v.save()))
   }
 
   toggleAllCompleted(completed) {
@@ -29,12 +34,12 @@ export class Todos {
     })
   }
 
-  getRemaining() {
-		return this.items.filter(v => v.completed === false)
+  get activeCount() {
+    return this.getRemaining().length
   }
 
-  activeCount() {
-    return this.getRemaing().length
+  getRemaining() {
+		return this.items.filter(v => v.completed === false)
   }
 
   totalCount() {

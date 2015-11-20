@@ -1,5 +1,12 @@
 import {store} from "./store"
 
+store.find = function(type, arg) {
+  if (_.isString(arg))
+    return _.fetch(`/rest/todo/${arg}`).then(data => new Todo(data))
+  else
+    return _.fetch("/rest/todo", {param: arg}).then(data => data.map(v => new Todo(v)))
+}
+
 export class Todo {
   static create(props) {
     var todo = new Todo(props)

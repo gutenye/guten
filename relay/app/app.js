@@ -1,10 +1,13 @@
 import "babel/polyfill"
 import React from "react"
+import React from "react"
 import ReactDOM from "react-dom"
 import Relay from "react-relay"
 import AppRoute from "./route"
 import {Todos} from "./common/todos"
+import _ from "lodash-guten"
 import cx from "classnames"
+global._ = _
 global.cx = cx
 
 class AppView extends React.Component {

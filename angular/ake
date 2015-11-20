@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+fix() {
+  echo "fix angular"
+  sed -i '$s/.*/exports.__esModule = true;/' node_modules/angular2/angular2.js node_modules/angular2/router.js node_modules/angular2/src/core/forms/directives/control_value_accessor.js
+}
+
+
+case "$1" in
+  fix ) fix ;;
+esac

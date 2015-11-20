@@ -10,7 +10,6 @@
   </style>
   <template>
     <todo-todos id="todos" self={{todos}} items={{todoItems}}></todo-todos>
-
     <!-- input -->
     <div>
       <input type="checkbox" on-change="toggleAllCompleted" />
@@ -58,6 +57,7 @@
 
     toggleAllCompleted(e) {
       this.todos.toggleAllCompleted(e.target.checked)
+      this.todos.saveAll()
     },
 
     enter(e) {
