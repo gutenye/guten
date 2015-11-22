@@ -13,15 +13,14 @@ export class Todos {
   }
 
   create(props) {
-    return Todo.create(props).then(todo => {
-      this.items.push(todo)
-    })
+    var todo = new Todo(props)
+    this.items.push(todo)
+    return todo.save()
   }
 
   delete(record) {
-    return record.delete().then(() => {
-      _.remove(this.items, {id: record.id})
-    })
+    _.remove(this.items, {id: record.id})
+    return record.delete()
   }
 
   saveAll() {
@@ -32,6 +31,7 @@ export class Todos {
     this.items.forEach(v => {
       v.completed = completed
     })
+    return this.saveAll()
   }
 
   get activeCount() {

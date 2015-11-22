@@ -1,13 +1,10 @@
 import "babel/polyfill"
 import React from "react"
-import React from "react"
 import ReactDOM from "react-dom"
 import Relay from "react-relay"
 import AppRoute from "./route"
 import {Todos} from "./common/todos"
-import _ from "lodash-guten"
 import cx from "classnames"
-global._ = _
 global.cx = cx
 
 class AppView extends React.Component {
@@ -19,14 +16,14 @@ class AppView extends React.Component {
       <div>
         <div>
           <input type="checkbox" onChange={todos.toggleAllCompleted} />
-          <input is="gut-input" placeholder="What needs to be done?" autofocus on-enter="enter" on-esc="esc" />
+          <input placeholder="What needs to be done?" autofocus onKeyDown={this.keydown.bind(this)} />
         </div>
 
         <ul>
           {todos.items.map(item =>
           <li className={cx({completed: item.completed})}>
-            <input type="checkbox" checked={item.completed} onChange={this.completedChanged.bind(this, item)}></input>
-            <input value={item.title} onChange={this.titleChanged}></input>
+            <input type="checkbox" checked={item.completed} onChange={this.setCompleted.bind(this, item)}></input>
+            <input value={item.title} onChange={this.setTitle}></input>
             <button onClick={this.delete}>X</button>
           </li>
           )}
@@ -41,12 +38,25 @@ class AppView extends React.Component {
     )
   }
 
-  completedChanged(item, e) {
+  keydown(e) {
+    switch (e.which) {
+    case 13: // Enter
+      this.todos.create({title: e.target.value})
+      this.setState({})
+      e.target.value = ""
+      break
+    case 27: // Esc
+      e.target.value = ""
+      break
+    }
+  }
+
+  setCompleted(item, e) {
     item.completed = e.target.checked
     item.save()
   }
 
-  titleChanged(item, e) {
+  setTitle(item, e) {
     item.title = e.target.value
     item.save()
   }

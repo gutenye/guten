@@ -1,15 +1,15 @@
+import _ from "lodash-guten"
+import cx from "classnames"
 import React, {Component} from "react"
 import ReactDom from "react-dom"
 import {Todos} from "./common/todos"
-import _ from "lodash-guten"
-import cx from "classnames"
+import {GutInput} from "./gut-input"
 global._ = _
 global.cx = cx
 
 class App extends Component {
   constructor(props) {
     super(props)
-    window.app = this
     Todos.find().then(todos => {
       this.todos = todos
       this.setState({})
@@ -24,15 +24,15 @@ class App extends Component {
       <div>
         <div>
           <input type="checkbox" onChange={this.toggleAllCompleted} />
-          <input placeholder="What needs to be done?" autofocus onKeyDown={this.keydown} />
+          <GutInput placeholder="What needs to be done?" autofocus onEnter={this.onEnter.bind(this)} />
         </div>
 
         <ul>
-          {todos.items.map(item =>
-          <li className={cx({completed: item.completed})}>
-            <input type="checkbox" checked={item.completed} onChange={this.completedChanged.bind(this, item)}></input>
-            <input value={item.title} onChange={this.titleChanged.bind(this, item)}></input>
-            <button onClick={this.delete.bind(this, item)}>X</button>
+          {todos.items.map(todo =>
+          <li className={cx({completed: todo.completed})}>
+            <input type="checkbox" checked={todo.completed} onChange={this.setCompleted.bind(this, todo)}></input>
+            <input value={todo.title} onChange={this.setTitle.bind(this, todo)}></input>
+            <button onClick={this.delete.bind(this, todo)}>X</button>
           </li>
           )}
         </ul>
@@ -46,45 +46,31 @@ class App extends Component {
     )
   }
 
-  keydown(e) {
-    switch (e.which) {
-    case 13: // Enter
-      this.todos.create({title: e.target.value}).then(() => {
-        this.setState({})
-      })
-      e.target.value = ""
-      break
-    case 27: // Esc
-      e.target.value = ""
-      break
-    }
+  onEnter(e) {
+    this.todos.create({title: e.target.value}).then(() => {
+      this.setState({})
+    })
+    e.target.value = ""
   }
 
   toggleAllCompleted(e) {
     this.todos.toggleAllCompleted(e.target.checked)
-    this.todos.saveAll().then(() => {
-      this.setState({})
-    })
+    this.setState({})
   }
 
-  completedChanged(item, e) {
-    item.completed = e.target.checked
-    item.save().then(() => {
-      this.setState({})
-    })
+  setCompleted(todo, e) {
+    todo.setCompleted(e.target.checked)
+    this.setState({})
   }
 
-  titleChanged(item, e) {
-    item.title = e.target.value
-    item.save().then(() => {
-      this.setState({})
-    })
+  setTitle(todo, e) {
+    todo.setTitle(e.target.value)
+    this.setState({})
   }
 
-  delete(item, e) {
-    this.todos.delete(item).then(() => {
-      this.setState({})
-    })
+  delete(todo, e) {
+    this.todos.delete(todo)
+    this.setState({})
   }
 }
 

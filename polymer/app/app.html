@@ -13,15 +13,15 @@
     <!-- input -->
     <div>
       <input type="checkbox" on-change="toggleAllCompleted" />
-      <input is="gut-input" placeholder="What needs to be done?" autofocus on-enter="enter" on-esc="esc" />
+      <input is="gut-input" placeholder="What needs to be done?" autofocus on-enter="enter" />
     </div>
 
     <!-- list -->
     <ul>
       <template is="dom-repeat" items={{todoItems}}>
         <li class$={{cxItem(item.completed)}}>
-          <input type="checkbox" checked={{item.completed}} on-change="completedChanged"></input>
-          <input value={{item.title}} on-input="titleChanged"></input>
+          <input type="checkbox" checked={{item.completed}} on-change="setCompleted"></input>
+          <input value={{item.title}} on-input="setTitle"></input>
           <button on-click="delete">X</button>
         </li>
       </template>
@@ -65,12 +65,12 @@
       e.target.value = ""
     },
 
-    completedChanged(e) {
+    setCompleted(e) {
       e.model.set("item.completed", e.target.checked)
       e.model.item.save()
     },
 
-    titleChanged(e) {
+    setTitle(e) {
       e.model.set("item.title", e.target.value)
       e.model.item.save()
     },

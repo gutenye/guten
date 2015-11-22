@@ -36,4 +36,14 @@ export class Todo {
   delete() {
     return store.delete(this)
   }
+
+  setCompleted(value) {
+    this.completed = value
+    this.save()
+  }
+
+  setTitle(value) {
+    this.title = value
+    this.save()
+  }
 }
