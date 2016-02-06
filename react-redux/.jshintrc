@@ -1,0 +1,15 @@
+{
+  "predef": ["_", "$"],
+  "node": true,
+  "browser": true,
+  "asi": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "boss": true,
+  "evil": true,
+  "newcap": true,
+  "noarg": true,
+  "undef": true,
+  "sub": true,
+  "esnext": true
+}

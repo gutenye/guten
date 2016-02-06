@@ -1,0 +1,14 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "FIXME",
+  "dependencies": {
+    "classnames": "^2.2.0",
+    "lodash": "^3.10.1",
+    "lodash-guten": "^3.10.3",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.5"
+  }
+}

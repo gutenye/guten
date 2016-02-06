@@ -1,7 +1,7 @@
-import {Directive} from "angular2/angular2"
+import {Directive} from "angular2/core"
 
 @Directive({
-  selector: "[gut-input]",
+  selector: "[gutInput]",
   host: {
     "(keydown.esc)": "esc($event)"
   }

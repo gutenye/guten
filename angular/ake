@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
-fix() {
-  echo "fix angular"
-  sed -i '$s/.*/exports.__esModule = true;/' node_modules/angular2/angular2.js node_modules/angular2/router.js node_modules/angular2/src/core/forms/directives/control_value_accessor.js
+main() {
+  webpack-dev-server --inline
 }
 
+fix() {
+  echo "fix angular"
+  sed -i '$s/.*/exports.__esModule = true;/' node_modules/angular2/{core.js,common.js,router.js,http.js,platform/browser.js,src/common/forms/directives/control_value_accessor.js}
+}
 
 case "$1" in
+  "" ) main ;;
   fix ) fix ;;
 esac

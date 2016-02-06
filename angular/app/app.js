@@ -1,22 +1,23 @@
-import _ from "lodash-guten"
-import {Component, bootstrap, CORE_DIRECTIVES} from "angular2/angular2"
+import {Component, enableProdMode} from "angular2/core"
+import {bootstrap} from "angular2/platform/browser"
 import {Todos} from "./common/todos"
 import {GutInput} from "./gut-input"
+import _ from "lodash-guten"
 global._ = _
 
 @Component({
   selector: "app",
   template: `
-    <div *ng-if="todos">
+    <div *ngIf="todos">
     <!-- input -->
     <div>
       <input type="checkbox" (change)="todos.toggleAllCompleted($event.target.checked)" />
-      <input gut-input placeholder="What needs to be done?" autofocus (keydown.enter)="enter($event)" />
+      <input gutInput placeholder="What needs to be done?" autofocus (keydown.enter)="enter($event)" />
     </div>
 
     <!-- list -->
     <ul>
-      <li *ng-for="#todo of todos.items" [class]="{completed: todo.completed}">
+      <li *ngFor="#todo of todos.items" [class]="{completed: todo.completed}">
         <input type="checkbox" [checked]="todo.completed" (change)="todo.setCompleted($event.target.checked)"></input>
         <input [value]="todo.title" (input)="todo.setTitle($event.target.value)"></input>
         <button (click)="todos.delete(todo)">X</button>
@@ -31,7 +32,7 @@ global._ = _
     </flex>
     </div>
   `,
-  directives: [CORE_DIRECTIVES, GutInput]
+  directives: [GutInput]
 })
 
 class App {
@@ -42,9 +43,11 @@ class App {
   }
 
   enter(e) {
-    this.todos.create({title: e.target.value})
+    dispatch("create todo", {title: e.target.value})
+    //this.todos.create({title: e.target.value})
     e.target.value = ""
   }
 }
 
 bootstrap(App)
+  .catch(err => console.error(err))
