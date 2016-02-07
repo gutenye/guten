@@ -43,8 +43,7 @@ class App {
   }
 
   enter(e) {
-    dispatch("create todo", {title: e.target.value})
-    //this.todos.create({title: e.target.value})
+    this.todos.create({title: e.target.value})
     e.target.value = ""
   }
 }
