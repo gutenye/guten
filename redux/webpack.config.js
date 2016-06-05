@@ -12,15 +12,9 @@ module.exports = {
     ]
   },
 
-  resolve: {
-    root: [__dirname],
-  },
-
   devServer: {
     port: 3003,
     host: "0.0.0.0",
     contentBase: "./src",
   },
-
-  devtool: "cheap-module-eval-source-map",
 }

@@ -1,13 +1,22 @@
-var path = require("path")
-var webpack = require("webpack")
-
 module.exports = {
-  entry: path.join(__dirname, "app/app.js"),
-  output: {path: path.join(__dirname, "dist"), filename: "app.js" },
-  module: {
-    loaders: [{test: /\.js$/, loader: "babel", query: {presets: ["es2015", "react", "stage-0"]}, exclude: /node_modules/}]
+  entry: "./src/App",
+
+  output: {
+    path: `${__dirname}/dist`,
+    filename: "app.js",
   },
+
+  module: {
+    loaders: [
+      { test: /\.js$/, loader: "babel", exclude: /node_modules/ },
+    ]
+  },
+
   devServer: {
-    port: 3003
-  }
+    port: 3003,
+    host: "0.0.0.0",
+    contentBase: "./src",
+  },
+
+  devtool: "cheap-module-eval-source-map",
 }

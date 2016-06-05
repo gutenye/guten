@@ -9,15 +9,12 @@ state = {
 
 View
 
-  @connect(null, {addTodo})
+  @connect(null, {addTodo, setFilter})
   <Header>
 
   @connect({filteredTodos}, {completeTodo})
   <Body>
     <Todo todo completeTodo>
-
-  @connect(null, {setFilter})
-  <Footer>
 
 Actions
 
@@ -26,4 +23,10 @@ Actions
   DELETE_TODO     state.filter(todo => todo.id !== action.id)
 
   SET_FILTER      "SHOW_ALL"
+```
+
+The Flow
+
+```
+addTodo -> change state.todos -> re-render
 ```
