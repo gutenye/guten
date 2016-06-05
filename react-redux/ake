@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+main() {
+  serve
+}
+
+serve() {
+  webpack-dev-server --inline --hot
+}
+
+build() {
+  NODE_ENV=production webpack --optimize-minimize --optimize-occurrence-order --optimize-dedupe
+  cp -r src/public/. dist
+}
+
+case "$1" in
+  "" ) main ;;
+  b | build ) build ;;
+esac

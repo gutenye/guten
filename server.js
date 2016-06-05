@@ -12,7 +12,7 @@ import _ from "lodash"
 global._ = _
 global.pd = console.log.bind(console)
 
-var APP_PORT = 3000
+var APP_PORT = 3003
 var app = express()
 var proxy = httpProxy.createProxyServer()
 app.use(bodyParser.json())

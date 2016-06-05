@@ -1,0 +1,29 @@
+### Redux way
+
+```
+state = {
+  todos: [{id, text, completed}],
+  filter: "SHOW_ALL", "SHOW_ACTIVE"
+}
+  filteredTodos: todos filter
+
+View
+
+  @connect(null, {addTodo})
+  <Header>
+
+  @connect({filteredTodos}, {completeTodo})
+  <Body>
+    <Todo todo completeTodo>
+
+  @connect(null, {setFilter})
+  <Footer>
+
+Actions
+
+  ADD_TODO        [{id: 1, text: action.text, completed: false}, ...state]
+  COMPLTE_TODO    state.map(todo => todo.id === action.id ? {...todo, completed: true} : todo)
+  DELETE_TODO     state.filter(todo => todo.id !== action.id)
+
+  SET_FILTER      "SHOW_ALL"
+```

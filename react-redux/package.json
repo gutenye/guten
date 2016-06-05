@@ -1,14 +1,22 @@
 {
-  "name": "app",
+  "name": "hello",
   "version": "1.0.0",
-  "description": "FIXME",
+  "description": "hello",
   "dependencies": {
-    "classnames": "^2.2.0",
-    "lodash": "^3.10.1",
-    "lodash-guten": "^3.10.3",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "react-redux": "^4.0.6",
-    "redux": "^3.0.5"
+    "react": "",
+    "react-dom": "",
+    "redux": "",
+    "react-redux": ""
+  },
+  "devDependencies": {
+    "babel-core": "",
+    "babel-loader": "",
+    "babel-plugin-transform-decorators-legacy": "",
+    "babel-preset-es2015": "",
+    "babel-preset-react": "",
+    "babel-preset-stage-0": "",
+    "gulp": "",
+    "webpack": "",
+    "webpack-dev-server": ""
   }
 }
