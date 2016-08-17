@@ -21,17 +21,10 @@ app.use((req, resp, next) => {
   next()
 })
 
+////////////
+// Graphql API
 ///////////
-// Client
-//////////
-app.use("/react", webpackDevMiddleware(webpack(require("./react/webpack.config")), {noInfo: true}))
-app.use("/angular", webpackDevMiddleware(webpack(require("./angular/webpack.config")), {noInfo: true}))
-// relay use babel 5.0
-//app.use("/relay", webpackDevMiddleware(webpack(require("./relay/webpack.config")), {noInfo: true}))
-//app.use("/relay", (req, res) => proxy.web(req, res, {target: 'http://127.0.0.1:3008'}))
-app.use("/common", webpackDevMiddleware(webpack(require("./common/webpack.config")), {noInfo: true}))
-app.use("/polymer", express.static("polymer"))
-app.use("/", express.static(__dirname))
+app.use("/graphql", graphqlHTTP({schema: Schema, graphiql: true, pretty: true}))
 
 //////////////
 // REST API
@@ -59,12 +52,21 @@ app.delete("/rest/todo/:id", (req, res) => {
   res.json({})
 })
 
-////////////
-// Graphql API
 ///////////
-//app.use("/graphql", graphqlHTTP({schema: Schema, graphiql: true, pretty: true}))
-//app.use("/graphql", (req, res) => proxy.web(req, res, {target: 'http://127.0.0.1:3009'}))
+// Client
+//////////
+app.use("/react", webpackDevMiddleware(webpack(require("./react/webpack.config")), {noInfo: true}))
+app.use("/angular", webpackDevMiddleware(webpack(require("./angular/webpack.config")), {noInfo: true}))
+// relay use babel 5.0
+//app.use("/relay", webpackDevMiddleware(webpack(require("./relay/webpack.config")), {noInfo: true}))
+//app.use("/relay", (req, res) => proxy.web(req, res, {target: 'http://127.0.0.1:3008'}))
+app.use("/common", webpackDevMiddleware(webpack(require("./common/webpack.config")), {noInfo: true}))
+app.use("/polymer", express.static("polymer"))
+app.use("/", express.static(__dirname))
+
+
 
 app.listen(APP_PORT, () => {
-  console.log(`Server is now running on http://localhost:${APP_PORT}`)
+  console.log(`>> localhost:${APP_PORT}`)
 })
+

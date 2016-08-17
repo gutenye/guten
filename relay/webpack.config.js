@@ -17,4 +17,6 @@ module.exports = {
     host: "0.0.0.0",
     contentBase: "./src",
   },
+
+  devtool: "cheap-module-eval-source-map",
 }

@@ -10,7 +10,7 @@ update() {
 }
 
 mount() {
-  mount -o bind ../common app/common
+  mount -o bind ../common src/common
 }
 
 case "$1" in
