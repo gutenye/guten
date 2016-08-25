@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+main() {
+  PORT=3003 npm start
+}
+
+build() {
+  npm run build
+}
+
+case "$1" in
+  "" ) main ;;
+  b | build ) build ;;
+esac

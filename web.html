@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>?React</title>
+  <meta charset="utf-8" />
+<style>
+  div > span {
+    width: 100px;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/react/dist/react.js"></script>
+<script src="node_modules/react-dom/dist/react-dom.js"></script>
+<script src="node_modules/react-dom/dist/react-dom-server.js"></script>
+<script src="node_modules/es6-shim/es6-shim.js"></script>
+<script src="node_modules/babel-standalone/babel.js"></script>
+<script type="text/babel">
+"use strict";
+var pd = console.log.bind(console)
+Object.assign(window, React)
+Object.assign(window, ReactDOM)
+var t = React.PropTypes
+
+class App extends Component { //{{{1
+  constructor(props) {
+    super(props)
+    this.state = {value: "1", checked: true}
+  }
+
+  render() {
+    var {posts, post} = this.props
+    var {value, checked} = this.state
+    var styles = {
+      root: {
+        color: "inherit"
+      },
+    }
+    var id = "a"
+    var className = "b"
+
+    return (
+      <div style={styles.root} {...{id, className}}>
+        <div>
+          <span>Input:</span>
+          <input value={value} onChange={this.input.bind(this, 1)} />{value}
+          <input type="checkbox" checked={checked} onChange={this.check.bind(this)} />{checked.toString()}
+        </div>
+        <div><span>Button:</span> <button onClick={this.rerender.bind(this)}>Rerender</button></div>
+        <button onClick={this.click.bind(this)}>Save</button>
+        <Title />
+        <Form />
+      </div>
+    )
+  }
+
+  input(arg, evt) {
+    this.setState({value: evt.target.value})
+  }
+
+  check(evt) {
+    this.setState({checked: evt.target.checked})
+  }
+
+  click() {
+    pd("clicked")
+    this.setState({value: "clicked"})
+  }
+
+  rerender() {
+    post.title = "rerender"
+    this.setState({})
+  }
+
+  getChildContext() {
+    return {color: "red", name: "b"}
+  }
+}
+
+App.childContextTypes = {
+  color: t.string,
+  name: t.string,
+}
+//}}}1
+class Title extends Component { //{{{1
+  constructor(props) {
+    super(props)
+    this.state = {v: 0}
+  }
+
+  render() {
+    pd(1, this.context)
+    return (
+        <p onClick={this.click.bind(this)}>{this.props.v} {this.state.v}</p>
+    )
+  }
+
+  click() {
+    pd(this)
+    this.setState({v: this.props.v})
+  }
+}
+Title.contextTypes = {
+  color: t.string
+}
+//}}}1
+class Form extends Component { //{{{1
+  render() {
+    var onSubmit = (e) => {
+      e.preventDefault()
+      var data = new FormData(e.target)
+      pd(data, Object.keys(data), data.get("email"))
+    }
+
+    return (
+      <div>
+        <h3>Form</h3>
+        <form onSubmit={onSubmit}>
+          <input name="email" type="text" />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    )
+  }
+} //}}}1
+
+render(<App /> , document.querySelector("#app"))
+</script>
+</body>
+</html>
