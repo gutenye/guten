@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import {graphql} from "react-apollo"
 import gql from "graphql-tag"
 
-class App extends Component {
+class Home extends Component {
   state = {
     currentPage: 1
   }
@@ -29,14 +29,14 @@ class App extends Component {
     fetchMore({
       variables: {page: currentPage},
       updateQuery: (data, {fetchMoreResult, queryVariables}) => {
-        return {posts: fetchMoreResult.data.posts}
+        return {...data, posts: fetchMoreResult.data.posts}
       }
     })
   }
 }
 
-App = graphql(gql`
-  query App($page: Int, $limit: Int) {
+Home = graphql(gql`
+  query Home($page: Int, $limit: Int) {
     posts(page: $page, limit: $limit) {
       id
       title
@@ -57,6 +57,6 @@ App = graphql(gql`
   props: ({data}) => {
     return data
   },
-})(App)
+})(Home)
 
-export default App
+export default Home

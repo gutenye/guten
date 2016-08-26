@@ -13,6 +13,7 @@ Query
   Y Populate Relationship and Pagination
     Component Fragment
 
-
 Mutation
   ...
+
+Admin

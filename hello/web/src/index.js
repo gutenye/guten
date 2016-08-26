@@ -2,8 +2,13 @@ import React from "react"
 import {render} from "react-dom"
 import ApolloClient from "apollo-client"
 import {ApolloProvider} from "react-apollo"
-import App from "./App"
+import routes from "./routes"
 
 const client = new ApolloClient()
 
-render(<ApolloProvider client={client}><App /></ApolloProvider>, document.getElementById("root"))
+render(
+  <ApolloProvider client={client}>
+    {routes}
+  </ApolloProvider>,
+  document.getElementById("root")
+)
