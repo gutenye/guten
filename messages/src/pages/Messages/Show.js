@@ -13,7 +13,7 @@ export default class ShowMessage extends Component {
     var {user} = message
     return (
       <div>
-        <NavBar leftContent="Messages" onLeftClick={() => router.push("/")} rightContent="Details">{user}</NavBar>
+        <NavBar mode="light" leftContent="Messages" onLeftClick={() => router.push("/")} rightContent="Details">{user}</NavBar>
         <div style={{height: 100}}></div>
         <ReplayBar />
       </div>
